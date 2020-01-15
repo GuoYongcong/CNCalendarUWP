@@ -1,0 +1,227 @@
+﻿<Page
+    x:Class="CNCalendarUWP.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CNCalendarUWP"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Page.Resources>
+        <Style x:Key="ButtonStyle1" TargetType="Button">
+            <Setter Property="Background" Value="{ThemeResource ButtonBackgroundThemeBrush}"/>
+            <Setter Property="Foreground" Value="{ThemeResource ButtonForeground}"/>
+            <Setter Property="Padding" Value="8,4,8,4"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}"/>
+            <Setter Property="FontWeight" Value="Normal"/>
+            <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}"/>
+            <Setter Property="UseSystemFocusVisuals" Value="{StaticResource UseSystemFocusVisuals}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid x:Name="RootGrid" Background="Transparent">
+                            <Rectangle Width="{TemplateBinding Width}"
+                                     Height="{TemplateBinding Height}"
+                                     Fill="{TemplateBinding Background}" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Stretch">
+                            </Rectangle>
+                            <ContentPresenter x:Name="ContentPresenter" AutomationProperties.AccessibilityView="Raw" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentTransitions="{TemplateBinding ContentTransitions}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" Padding="{TemplateBinding Padding}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            <VisualStateManager.VisualStateGroups>
+
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal">
+                                        <Storyboard>
+                                            <PointerUpThemeAnimation Storyboard.TargetName="RootGrid"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="PointerOver">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Background">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonBackgroundPointerOver}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="BorderBrush">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonBorderBrushPointerOver}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonForegroundPointerOver}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <PointerUpThemeAnimation Storyboard.TargetName="RootGrid"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Pressed">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Background">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonBackgroundPressed}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="BorderBrush">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonBorderBrushPressed}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonForegroundPressed}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <PointerDownThemeAnimation Storyboard.TargetName="RootGrid"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Disabled">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Background">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonBackgroundDisabled}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="BorderBrush">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonBorderBrushDisabled}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonForegroundDisabled}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+    </Page.Resources>
+
+    <Grid>
+       
+        <RelativePanel Background="#FFFFCC" >
+
+        <SplitView Name="MySplitView" RelativePanel.AlignBottomWithPanel="True" OpenPaneLength="180" CompactPaneLength="55" DisplayMode="CompactOverlay" RelativePanel.AlignTopWithPanel="True"  >
+            <SplitView.Pane>
+                <RelativePanel Background="wheat">
+                        <Button Name="Menu" Style="{StaticResource ButtonStyle1}" Background="Wheat" Foreground="Brown" FontFamily="Segoe MDL2 Assets" Content="&#xE700;" HorizontalContentAlignment="Left" FontSize="34" Width="180" Height="55"  Click="Menu_Click"/>
+                        <Button Name="MonthButton" Style="{StaticResource ButtonStyle1}" RelativePanel.Below="Menu"  FontFamily="Segoe MDL2 Assets" Content="&#xE787;  月视图" HorizontalContentAlignment="Left" FontSize="34" Height="55" Width="180" Background="Brown" Foreground="wheat" Click="MonthButton_Click"/>
+                        <Button Name="WeekButton" Style="{StaticResource ButtonStyle1}" RelativePanel.Below="MonthButton" FontFamily="Segoe MDL2 Assets" Content="&#xE8C0;  周视图" HorizontalContentAlignment="Left" FontSize="34" Width="180" Height="55" Background="Wheat" Foreground="Brown" Click="WeekButton_Click"/>
+                        <Button Name="DayButton" Style="{StaticResource ButtonStyle1}" RelativePanel.Below="WeekButton"  FontFamily="Segoe MDL2 Assets" Content="&#xE8BF;  日视图" HorizontalContentAlignment="Left" FontSize="34" Width="180" Height="55" Background="Wheat" Foreground="Brown" Click="DayButton_Click"/>
+
+                        <Button Name="JumpDateButton" Style="{StaticResource ButtonStyle1}" RelativePanel.Below="DayButton"  FontFamily="Segoe MDL2 Assets" Content="&#xE8F5;  日期跳转" HorizontalContentAlignment="Left" FontSize="34" Width="180" Height="55" Background="Wheat" Foreground="Brown" Click="JumpDateButton_Click"/>
+                        <Button Name="ScheduleButton" Style="{StaticResource ButtonStyle1}" RelativePanel.Below="JumpDateButton" FontFamily="Segoe MDL2 Assets" Content="&#xEE93;  日程" HorizontalContentAlignment="Left" FontSize="34" Width="180" Height="55" Background="Wheat" Foreground="Brown" Click="ScheduleButton_Click"/>
+
+                    </RelativePanel>
+            </SplitView.Pane>
+                <SplitView.Content>
+                    <RelativePanel>
+                        <TextBlock Name="IconTextBlock" FontFamily="Segoe MDL2 Assets" Text="&#xEE93;" FontSize="36" FontWeight="Bold" Margin="50,60,0,0"/>
+                        <TextBlock Name="ScheduleTextBlock" Text="日程" FontSize="24" FontWeight="Bold" Margin="100,60,0,0"/>
+                        <Button Style="{StaticResource ButtonStyle1}" FontFamily="Segoe MDL2 Assets" Content="&#xE948;" FontSize="16" Foreground="White" Background="Brown" Width="40" Height="40" Name="AddButton" Margin="160,55,0,0"/>
+                        <TextBox Name="MyTextBox" IsReadOnly="True" FontSize="36" FontWeight="Bold" Margin="30,100,0,0" Width="200" TextWrapping="Wrap"/>
+                    </RelativePanel>
+                </SplitView.Content>
+            </SplitView>
+            <SplitView Name="JumpDateSplitView"  Margin="55,220,0,0" Height="140" DisplayMode="Overlay" OpenPaneLength="300">
+                <SplitView.Pane>
+                    <RelativePanel Background="Wheat">
+                        <ToggleSwitch Name="MyToggleSwitch" OffContent="公历" OnContent="农历"  Toggled="MyToggleSwitch_Toggled"/>
+                        <Button Style="{StaticResource ButtonStyle1}" Name="buttonBackToToday" Content="回到今天" RelativePanel.AlignRightWithPanel="True" Height="40" Width="100" Background="Brown" Foreground="Wheat" FontSize="20" FontWeight="Bold" Click="ButtonBackToToday_Click"/>
+                        <ComboBox x:Name="comboBoxYears" RelativePanel.Below="MyToggleSwitch" Height="50" Width="100" FontWeight="Bold" FontSize="16" MaxDropDownHeight="400"  />
+                        <ComboBox x:Name="comboBoxMonths" RelativePanel.Below="MyToggleSwitch" RelativePanel.RightOf="comboBoxYears" Height="50" Width="100" FontWeight="Bold" FontSize="16" MaxDropDownHeight="400"  >
+                            <x:String>01月</x:String>
+                            <x:String>02月</x:String>
+                            <x:String>03月</x:String>
+                            <x:String>04月</x:String>
+                            <x:String>05月</x:String>
+                            <x:String>06月</x:String>
+                            <x:String>07月</x:String>
+                            <x:String>08月</x:String>
+                            <x:String>09月</x:String>
+                            <x:String>10月</x:String>
+                            <x:String>11月</x:String>
+                            <x:String>12月</x:String>
+                        </ComboBox>
+                        <ComboBox x:Name="comboBoxDays" RelativePanel.Below="MyToggleSwitch" RelativePanel.RightOf="comboBoxMonths" Height="50" Width="100" FontWeight="Bold" FontSize="16" MaxDropDownHeight="400" />
+                        <ComboBox x:Name="comboBoxLunarYears"  RelativePanel.Below="comboBoxYears" Height="50" Width="100" FontWeight="Bold" FontSize="16"  MaxDropDownHeight="400" IsEnabled="False" />
+                        <ComboBox x:Name="comboBoxLunarMonths"  RelativePanel.Below="comboBoxMonths"  RelativePanel.RightOf="comboBoxLunarYears" Height="50" Width="100" FontWeight="Bold" FontSize="16"  MaxDropDownHeight="400" IsEnabled="False" >
+                            <x:String>正月</x:String>
+                            <x:String>二月</x:String>
+                            <x:String>三月</x:String>
+                            <x:String>四月</x:String>
+                            <x:String>五月</x:String>
+                            <x:String>六月</x:String>
+                            <x:String>七月</x:String>
+                            <x:String>八月</x:String>
+                            <x:String>九月</x:String>
+                            <x:String>十月</x:String>
+                            <x:String>冬月</x:String>
+                            <x:String>腊月</x:String>
+
+                        </ComboBox>
+                        <ComboBox x:Name="comboBoxLunarDays" RelativePanel.Below="comboBoxDays"  RelativePanel.RightOf="comboBoxLunarMonths" Height="50" Width="100" FontWeight="Bold" FontSize="16" MaxDropDownHeight="400" IsEnabled="False"/>
+
+                    </RelativePanel>
+                </SplitView.Pane>
+            </SplitView>
+
+        <Button Style="{StaticResource ButtonStyle1}" x:Name="button00"  HorizontalAlignment="Left" Height="68" Margin="372,239,0,0" VerticalAlignment="Top" Width="119" Background="Wheat" FontSize="18" Click="Button_Click" />
+        <Button Style="{StaticResource ButtonStyle1}" x:Name="button01"  HorizontalAlignment="Left" Height="68" Margin="491,239,0,0" VerticalAlignment="Top" Width="122" Background="Wheat" FontSize="18" Click="Button_Click"/>
+        <Button Style="{StaticResource ButtonStyle1}" x:Name="button02" HorizontalAlignment="Left" Height="68" Margin="613,239,0,0" VerticalAlignment="Top" Width="119" Background="Wheat" FontSize="18" Click="Button_Click"/>
+        <Button Style="{StaticResource ButtonStyle1}" x:Name="button03" HorizontalAlignment="Left" Height="68" Margin="732,239,0,0" VerticalAlignment="Top" Width="122" Background="Wheat" FontSize="18" Click="Button_Click"/>
+        <Button Style="{StaticResource ButtonStyle1}" x:Name="button04" HorizontalAlignment="Left" Height="68" Margin="854,239,0,0" VerticalAlignment="Top" Width="119" Background="Wheat" FontSize="18"  Click="Button_Click"/>
+        <Button Style="{StaticResource ButtonStyle1}" x:Name="button05" HorizontalAlignment="Left" Height="68" Margin="973,239,0,0" VerticalAlignment="Top" Width="122" Background="Wheat" FontSize="18"  Click="Button_Click"/>
+        <Button Style="{StaticResource ButtonStyle1}" x:Name="button06" HorizontalAlignment="Left" Height="68" Margin="1095,239,0,0" VerticalAlignment="Top" Width="119" Background="Wheat" FontSize="18"  Click="Button_Click"/>
+        <Button Style="{StaticResource ButtonStyle1}" x:Name="button10" HorizontalAlignment="Left" Height="70" Margin="372,307,0,0" VerticalAlignment="Top" Width="119" Background="Wheat" FontSize="18" Click="Button_Click"/>
+        <Button Style="{StaticResource ButtonStyle1}" x:Name="button11" HorizontalAlignment="Left" Height="70" Margin="491,307,0,0" VerticalAlignment="Top" Width="122" Background="Wheat" FontSize="18"  Click="Button_Click"/>
+        <Button Style="{StaticResource ButtonStyle1}" x:Name="button12" HorizontalAlignment="Left" Height="70" Margin="613,307,0,0" VerticalAlignment="Top" Width="119" Background="Wheat" FontSize="18"  Click="Button_Click"/>
+        <Button Style="{StaticResource ButtonStyle1}" x:Name="button13" HorizontalAlignment="Left" Height="70" Margin="732,307,0,0" VerticalAlignment="Top" Width="122" Background="Wheat" FontSize="18"  Click="Button_Click"/>
+        <Button Style="{StaticResource ButtonStyle1}" x:Name="button14" HorizontalAlignment="Left" Height="70" Margin="854,307,0,0" VerticalAlignment="Top" Width="119" Background="Wheat" FontSize="18" Click="Button_Click"/>
+        <Button Style="{StaticResource ButtonStyle1}" x:Name="button15" HorizontalAlignment="Left" Height="70" Margin="973,307,0,0" VerticalAlignment="Top" Width="122" Background="Wheat" FontSize="18" Click="Button_Click"/>
+        <Button Style="{StaticResource ButtonStyle1}" x:Name="button16" HorizontalAlignment="Left" Height="70" Margin="1095,307,0,0" VerticalAlignment="Top" Width="119" Background="Wheat" FontSize="18" Click="Button_Click"/>
+        <Button Style="{StaticResource ButtonStyle1}" x:Name="button20" HorizontalAlignment="Left" Height="68" Margin="372,377,0,0" VerticalAlignment="Top" Width="119" Background="Wheat" FontSize="18" Click="Button_Click"/>
+        <Button Style="{StaticResource ButtonStyle1}" x:Name="button21" HorizontalAlignment="Left" Height="68" Margin="491,377,0,0" VerticalAlignment="Top" Width="122" Background="Wheat" FontSize="18" Click="Button_Click"/>
+        <Button Style="{StaticResource ButtonStyle1}" x:Name="button22" HorizontalAlignment="Left" Height="68" Margin="613,377,0,0" VerticalAlignment="Top" Width="119" Background="Wheat" FontSize="18" Click="Button_Click"/>
+        <Button Style="{StaticResource ButtonStyle1}" x:Name="button23" HorizontalAlignment="Left" Height="68" Margin="732,377,0,0" VerticalAlignment="Top" Width="122" Background="Wheat" FontSize="18" Click="Button_Click"/>
+        <Button Style="{StaticResource ButtonStyle1}" x:Name="button24" HorizontalAlignment="Left" Height="68" Margin="854,377,0,0" VerticalAlignment="Top" Width="119" Background="Wheat" FontSize="18" Click="Button_Click"/>
+        <Button Style="{StaticResource ButtonStyle1}" x:Name="button25" HorizontalAlignment="Left" Height="68" Margin="973,377,0,0" VerticalAlignment="Top" Width="122" Background="Wheat" FontSize="18" Click="Button_Click"/>
+        <Button Style="{StaticResource ButtonStyle1}" x:Name="button26" HorizontalAlignment="Left" Height="68" Margin="1095,377,0,0" VerticalAlignment="Top" Width="119" Background="Wheat" FontSize="18" Click="Button_Click"/>
+        <Button Style="{StaticResource ButtonStyle1}" x:Name="button30" HorizontalAlignment="Left" Height="68" Margin="372,445,0,0" VerticalAlignment="Top" Width="119" Background="Wheat" FontSize="18" Click="Button_Click"/>
+        <Button Style="{StaticResource ButtonStyle1}" x:Name="button31" HorizontalAlignment="Left" Height="68" Margin="491,445,0,0" VerticalAlignment="Top" Width="122" Background="Wheat" FontSize="18" Click="Button_Click"/>
+        <Button Style="{StaticResource ButtonStyle1}" x:Name="button32" HorizontalAlignment="Left" Height="68" Margin="613,445,0,0" VerticalAlignment="Top" Width="119" Background="Wheat" FontSize="18" Click="Button_Click"/>
+        <Button Style="{StaticResource ButtonStyle1}" x:Name="button33" HorizontalAlignment="Left" Height="68" Margin="732,445,0,0" VerticalAlignment="Top" Width="122" Background="Wheat" FontSize="18" Click="Button_Click"/>
+        <Button Style="{StaticResource ButtonStyle1}" x:Name="button34" HorizontalAlignment="Left" Height="68" Margin="854,445,0,0" VerticalAlignment="Top" Width="119" Background="Wheat" FontSize="18" Click="Button_Click"/>
+        <Button Style="{StaticResource ButtonStyle1}" x:Name="button35" HorizontalAlignment="Left" Height="68" Margin="973,445,0,0" VerticalAlignment="Top" Width="122" Background="Wheat" FontSize="18" Click="Button_Click"/>
+        <Button Style="{StaticResource ButtonStyle1}" x:Name="button36" HorizontalAlignment="Left" Height="68" Margin="1095,445,0,0" VerticalAlignment="Top" Width="119" Background="Wheat" FontSize="18" Click="Button_Click"/>
+        <Button Style="{StaticResource ButtonStyle1}" x:Name="button40" HorizontalAlignment="Left" Height="70" Margin="372,513,0,0" VerticalAlignment="Top" Width="119" Background="Wheat" FontSize="18" Click="Button_Click"/>
+        <Button Style="{StaticResource ButtonStyle1}" x:Name="button41" HorizontalAlignment="Left" Height="70" Margin="491,513,0,0" VerticalAlignment="Top" Width="122" Background="Wheat" FontSize="18" Click="Button_Click"/>
+        <Button Style="{StaticResource ButtonStyle1}" x:Name="button42" HorizontalAlignment="Left" Height="70" Margin="613,513,0,0" VerticalAlignment="Top" Width="119" Background="Wheat" FontSize="18" Click="Button_Click"/>
+        <Button Style="{StaticResource ButtonStyle1}" x:Name="button43" HorizontalAlignment="Left" Height="70" Margin="732,513,0,0" VerticalAlignment="Top" Width="122" Background="Wheat" FontSize="18" Click="Button_Click"/>
+        <Button Style="{StaticResource ButtonStyle1}" x:Name="button44" HorizontalAlignment="Left" Height="70" Margin="854,513,0,0" VerticalAlignment="Top" Width="119" Background="Wheat" FontSize="18" Click="Button_Click"/>
+        <Button Style="{StaticResource ButtonStyle1}" x:Name="button45" HorizontalAlignment="Left" Height="70" Margin="973,513,0,0" VerticalAlignment="Top" Width="122" Background="Wheat" FontSize="18" Click="Button_Click"/>
+        <Button Style="{StaticResource ButtonStyle1}" x:Name="button46"  HorizontalAlignment="Left" Height="70" Margin="1095,513,0,0" VerticalAlignment="Top" Width="119" Background="Wheat" FontSize="18" Click="Button_Click"/>
+        <Button Style="{StaticResource ButtonStyle1}" x:Name="button50" HorizontalAlignment="Left" Height="68" Margin="372,583,0,0" VerticalAlignment="Top" Width="119" Background="Wheat" FontSize="18" Click="Button_Click"/>
+        <Button Style="{StaticResource ButtonStyle1}" x:Name="button51"  HorizontalAlignment="Left" Height="68" Margin="491,583,0,0" VerticalAlignment="Top" Width="122" Background="Wheat" FontSize="18" Click="Button_Click"/>
+        <Button Style="{StaticResource ButtonStyle1}" x:Name="button52"  HorizontalAlignment="Left" Height="68" Margin="613,583,0,0" VerticalAlignment="Top" Width="119" Background="Wheat" FontSize="18" Click="Button_Click"/>
+        <Button Style="{StaticResource ButtonStyle1}" x:Name="button53"  HorizontalAlignment="Left" Height="68" Margin="732,583,0,0" VerticalAlignment="Top" Width="122" Background="Wheat" FontSize="18" Click="Button_Click"/>
+        <Button Style="{StaticResource ButtonStyle1}" x:Name="button54" HorizontalAlignment="Left" Height="68" Margin="854,583,0,0" VerticalAlignment="Top" Width="119" Background="Wheat" FontSize="18" Click="Button_Click"/>
+        <Button Style="{StaticResource ButtonStyle1}" x:Name="button55"  HorizontalAlignment="Left" Height="68" Margin="973,583,0,0" VerticalAlignment="Top" Width="122" Background="Wheat" FontSize="18" Click="Button_Click"/>
+        <Button Style="{StaticResource ButtonStyle1}" x:Name="button56" HorizontalAlignment="Left" Height="68" Margin="1095,583,0,0" VerticalAlignment="Top" Width="119" Background="Wheat" FontSize="18" Click="Button_Click"/>
+        <TextBlock x:Name="textBlock0" HorizontalAlignment="Left" Height="25" Margin="424,192,0,0" Text="日"  VerticalAlignment="Top" Width="31" RenderTransformOrigin="0.5,1" FontSize="20" FontWeight="Bold" Foreground="Brown"/>
+        <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Height="25" Margin="544,192,0,0" Text="一"  VerticalAlignment="Top" Width="31" RenderTransformOrigin="0.5,1" FontSize="20" FontWeight="Bold" />
+        <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" Height="25" Margin="665,192,0,0" Text="二"  VerticalAlignment="Top" Width="31" RenderTransformOrigin="0.5,1" FontSize="20" FontWeight="Bold" />
+        <TextBlock x:Name="textBlock3" HorizontalAlignment="Left" Height="25" Margin="785,192,0,0" Text="三"  VerticalAlignment="Top" Width="32" RenderTransformOrigin="0.5,1" FontSize="20" FontWeight="Bold" />
+        <TextBlock x:Name="textBlock4" HorizontalAlignment="Left" Height="25" Margin="906,192,0,0" Text="四"  VerticalAlignment="Top" Width="31" RenderTransformOrigin="0.5,1" FontSize="20" FontWeight="Bold" />
+        <TextBlock x:Name="textBlock5" HorizontalAlignment="Left" Height="25" Margin="1027,192,0,0" Text="五"  VerticalAlignment="Top" Width="31" RenderTransformOrigin="0.5,1" FontSize="20" FontWeight="Bold" />
+        <TextBlock x:Name="textBlock6" HorizontalAlignment="Left" Height="25" Margin="1147,192,0,0" Text="六"  VerticalAlignment="Top" Width="31" RenderTransformOrigin="0.5,1" FontSize="20" FontWeight="Bold" Foreground="Brown"/>
+            <TextBlock Name="textBlockYear" Text="2018年"  FontSize="36" FontWeight="Bold" Margin="520,120,0,0"  />
+            <TextBlock Name="textBlockMonth" Text="10月"  FontSize="36" FontWeight="Bold" Margin="650,120,0,0" />
+            <TextBlock Name="textBlockDay" Text="28日"  FontSize="36" FontWeight="Bold" Margin="740,120,0,0"  />
+            
+            <TextBlock Name="textBlockLunarMonth" Text="九月"  FontSize="36" FontWeight="Bold" Margin="900,120,0,0" />
+            <TextBlock Name="textBlockLunarDay" Text="二十"  FontSize="36" FontWeight="Bold" Margin="980,120,0,0"  />
+            
+            <Rectangle Name="TopRectangle" Fill="Wheat" Height="55" RelativePanel.RightOf="Menu" RelativePanel.AlignRightWithPanel="True"/>
+            <Rectangle Name="LeftRectangle" Fill="Wheat" Width="54" RelativePanel.AlignBottomWithPanel="True" RelativePanel.Below="MySplitView"/>
+            <Rectangle Name="RightRectangle" Fill="Brown" Width="55" RelativePanel.AlignRightWithPanel="True" RelativePanel.AlignBottomWithPanel="True" RelativePanel.Below="TopRectangle"/>
+            <Rectangle Name="Bottomectangle" Fill="Brown" Height="55" RelativePanel.RightOf="LeftRectangle" RelativePanel.AlignBottomWithPanel="True" RelativePanel.AlignRightWithPanel="True"/>
+            <Polygon Points=" 55,0,55,55,0,55" Fill="Brown" RelativePanel.AlignBottomWithPanel="True" />
+            <Polygon Points=" 55,0,55,55,0,55" Fill="Brown" RelativePanel.AlignRightWithPanel="True"/>
+            
+
+        </RelativePanel>
+        
+   
+    </Grid>
+        
+</Page>
